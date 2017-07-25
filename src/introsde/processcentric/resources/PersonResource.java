@@ -53,18 +53,23 @@ public class PersonResource {
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_XML})
+	@Produces({ MediaType.APPLICATION_XML })
 	public Response createPerson(Person person) {
 		System.out.println("--> Creating Person... ");
         System.out.println("name " + person.getFirstname());
         
         initializeStorage();
         Holder<Person> holder = new Holder<Person>(person);
-        storage.createPerson(holder);
+        
+        Person p = storage.createPerson(holder);
         
         if (holder.value == null) {
         	return Response.notModified().build();
         }
-        return Response.ok().build(); 
+        return Response.ok().entity(new JAXBElement<Person>(
+				new QName("person"), 
+			    Person.class, 
+			    p)).build(); 
         
 	}
     
