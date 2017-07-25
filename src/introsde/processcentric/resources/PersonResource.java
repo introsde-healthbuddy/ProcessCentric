@@ -19,8 +19,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Holder;
 
-import introsde.business.ws.Business;
-import introsde.business.ws.BusinessService;
+//import introsde.business.ws.Business;
+//import introsde.business.ws.BusinessService;
 import introsde.localdatabase.soap.Person;
 import introsde.storage.ws.Storage;
 import introsde.storage.ws.StorageService;
@@ -37,8 +37,8 @@ public class PersonResource {
  
 	StorageService sService;
 	Storage storage;
-	BusinessService bService;
-	Business business;
+//	BusinessService bService;
+//	Business business;
 	
 	
 	public void initializeStorage(){
@@ -46,10 +46,10 @@ public class PersonResource {
 		storage = sService.getStorageImplPort();
 	}
 	
-	public void initializeBusiness(){
-		bService = new BusinessService();
-		business = bService.getBusinessImplPort();
-	}
+//	public void initializeBusiness(){
+//		bService = new BusinessService();
+//		business = bService.getBusinessImplPort();
+//	}
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_XML})

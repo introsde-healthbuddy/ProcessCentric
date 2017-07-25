@@ -13,8 +13,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.ws.Holder;
 
-import introsde.business.ws.Business;
-import introsde.business.ws.BusinessService;
+//import introsde.business.ws.Business;
+//import introsde.business.ws.BusinessService;
 import introsde.localdatabase.soap.Measure;
 import introsde.localdatabase.soap.Person;
 import introsde.storage.ws.Storage;
@@ -32,8 +32,8 @@ public class MeasureResource {
     
 	StorageService sService;
 	Storage storage;
-	BusinessService bService;
-	Business business;
+//	BusinessService bService;
+//	Business business;
 	
 	
 	public void initializeStorage(){
@@ -41,10 +41,10 @@ public class MeasureResource {
 		storage = sService.getStorageImplPort();
 	}
 	
-	public void initializeBusiness(){
-		bService = new BusinessService();
-		business = bService.getBusinessImplPort();
-	}
+//	public void initializeBusiness(){
+//		bService = new BusinessService();
+//		business = bService.getBusinessImplPort();
+//	}
 	
 	@POST
 	@Consumes({ MediaType.APPLICATION_XML })
