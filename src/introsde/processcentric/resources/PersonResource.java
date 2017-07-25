@@ -59,12 +59,15 @@ public class PersonResource {
         
         initializeStorage();
         Holder<Person> holder = new Holder<Person>(person);
-        storage.createPerson(holder);
+        Person p = storage.createPerson(holder);
         
         if (holder.value == null) {
         	return Response.notModified().build();
         }
-        return Response.ok().build(); 
+        return Response.ok().entity(new JAXBElement<Person>(
+				new QName("person"), 
+			    Person.class, 
+			    p)).build();  
         
 	}
     
