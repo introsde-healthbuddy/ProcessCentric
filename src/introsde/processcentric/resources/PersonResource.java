@@ -65,7 +65,10 @@ public class PersonResource {
         if (holder.value == null) {
         	return Response.notModified().build();
         }
-        return Response.ok().build(); 
+        return Response.ok().entity(new JAXBElement<Person>(
+				new QName("person"), 
+			    Person.class, 
+			    holder.value)).build(); 
         
 	}
     
