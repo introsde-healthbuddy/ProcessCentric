@@ -40,7 +40,7 @@ public interface Storage {
     @RequestWrapper(localName = "createPerson", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CreatePerson")
     @ResponseWrapper(localName = "createPersonResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CreatePersonResponse")
     @Action(input = "http://ws.storage.introsde/Storage/createPersonRequest", output = "http://ws.storage.introsde/Storage/createPersonResponse")
-    public Person createPerson(
+    public void createPerson(
         @WebParam(name = "person", targetNamespace = "", mode = WebParam.Mode.INOUT)
         Holder<Person> person);
 
