@@ -11,9 +11,7 @@ import javax.xml.ws.Action;
 import javax.xml.ws.Holder;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
-import introsde.adapter.ws.Exercise;
 import introsde.adapter.ws.Food;
-import introsde.adapter.ws.Recipe;
 import introsde.localdatabase.soap.Measure;
 import introsde.localdatabase.soap.Person;
 
@@ -32,45 +30,6 @@ import introsde.localdatabase.soap.Person;
 })
 public interface Storage {
 
-
-    /**
-     * 
-     * @param weightGoal
-     * @param weight
-     * @param user
-     * @param height
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(name = "success", targetNamespace = "")
-    @RequestWrapper(localName = "setInfo", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.SetInfo")
-    @ResponseWrapper(localName = "setInfoResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.SetInfoResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/setInfoRequest", output = "http://ws.storage.introsde/Storage/setInfoResponse")
-    public boolean setInfo(
-        @WebParam(name = "user", targetNamespace = "")
-        Person user,
-        @WebParam(name = "weight", targetNamespace = "")
-        double weight,
-        @WebParam(name = "height", targetNamespace = "")
-        double height,
-        @WebParam(name = "weight_goal", targetNamespace = "")
-        double weightGoal);
-
-    /**
-     * 
-     * @param foodId
-     * @return
-     *     returns introsde.adapter.ws.Food
-     */
-    @WebMethod
-    @WebResult(name = "food", targetNamespace = "")
-    @RequestWrapper(localName = "getFood", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetFood")
-    @ResponseWrapper(localName = "getFoodResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetFoodResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/getFoodRequest", output = "http://ws.storage.introsde/Storage/getFoodResponse")
-    public Food getFood(
-        @WebParam(name = "foodId", targetNamespace = "")
-        int foodId);
 
     /**
      * 
@@ -137,21 +96,6 @@ public interface Storage {
     public int deletePerson(
         @WebParam(name = "idPerson", targetNamespace = "")
         Long idPerson);
-
-    /**
-     * 
-     * @param personId
-     * @return
-     *     returns introsde.localdatabase.soap.Person
-     */
-    @WebMethod
-    @WebResult(name = "person", targetNamespace = "")
-    @RequestWrapper(localName = "getPersonById", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetPersonById")
-    @ResponseWrapper(localName = "getPersonByIdResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetPersonByIdResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/getPersonByIdRequest", output = "http://ws.storage.introsde/Storage/getPersonByIdResponse")
-    public Person getPersonById(
-        @WebParam(name = "personId", targetNamespace = "")
-        Long personId);
 
     /**
      * 
@@ -236,18 +180,6 @@ public interface Storage {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<introsde.adapter.ws.Exercise>
-     */
-    @WebMethod
-    @WebResult(name = "exercises", targetNamespace = "")
-    @RequestWrapper(localName = "getExercises", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetExercises")
-    @ResponseWrapper(localName = "getExercisesResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetExercisesResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/getExercisesRequest", output = "http://ws.storage.introsde/Storage/getExercisesResponse")
-    public List<Exercise> getExercises();
-
-    /**
-     * 
      * @param text
      * @return
      *     returns java.util.List<introsde.adapter.ws.Food>
@@ -258,126 +190,6 @@ public interface Storage {
     @ResponseWrapper(localName = "searchFoodResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.SearchFoodResponse")
     @Action(input = "http://ws.storage.introsde/Storage/searchFoodRequest", output = "http://ws.storage.introsde/Storage/searchFoodResponse")
     public List<Food> searchFood(
-        @WebParam(name = "text", targetNamespace = "")
-        String text);
-
-    /**
-     * 
-     * @param date
-     * @param user
-     * @return
-     *     returns java.util.List<introsde.adapter.ws.Exercise>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getExerciseEntry", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetExerciseEntry")
-    @ResponseWrapper(localName = "getExerciseEntryResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetExerciseEntryResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/getExerciseEntryRequest", output = "http://ws.storage.introsde/Storage/getExerciseEntryResponse")
-    public List<Exercise> getExerciseEntry(
-        @WebParam(name = "user", targetNamespace = "")
-        Person user,
-        @WebParam(name = "date", targetNamespace = "")
-        int date);
-
-    /**
-     * 
-     * @param idExercise
-     * @param minutes
-     * @param user
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "editExerciseEntry", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.EditExerciseEntry")
-    @ResponseWrapper(localName = "editExerciseEntryResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.EditExerciseEntryResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/editExerciseEntryRequest", output = "http://ws.storage.introsde/Storage/editExerciseEntryResponse")
-    public boolean editExerciseEntry(
-        @WebParam(name = "user", targetNamespace = "")
-        Person user,
-        @WebParam(name = "id_exercise", targetNamespace = "")
-        int idExercise,
-        @WebParam(name = "minutes", targetNamespace = "")
-        int minutes);
-
-    /**
-     * 
-     * @param minutes
-     * @param user
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "removeSleepTime", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.RemoveSleepTime")
-    @ResponseWrapper(localName = "removeSleepTimeResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.RemoveSleepTimeResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/removeSleepTimeRequest", output = "http://ws.storage.introsde/Storage/removeSleepTimeResponse")
-    public boolean removeSleepTime(
-        @WebParam(name = "user", targetNamespace = "")
-        Person user,
-        @WebParam(name = "minutes", targetNamespace = "")
-        int minutes);
-
-    /**
-     * 
-     * @param days
-     * @param user
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "saveTemplate", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.SaveTemplate")
-    @ResponseWrapper(localName = "saveTemplateResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.SaveTemplateResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/saveTemplateRequest", output = "http://ws.storage.introsde/Storage/saveTemplateResponse")
-    public boolean saveTemplate(
-        @WebParam(name = "user", targetNamespace = "")
-        Person user,
-        @WebParam(name = "days", targetNamespace = "")
-        int days);
-
-    /**
-     * 
-     * @param user
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "commitDay", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CommitDay")
-    @ResponseWrapper(localName = "commitDayResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CommitDayResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/commitDayRequest", output = "http://ws.storage.introsde/Storage/commitDayResponse")
-    public boolean commitDay(
-        @WebParam(name = "user", targetNamespace = "")
-        Person user);
-
-    /**
-     * 
-     * @param recipeId
-     * @return
-     *     returns introsde.adapter.ws.Recipe
-     */
-    @WebMethod
-    @WebResult(name = "recipe", targetNamespace = "")
-    @RequestWrapper(localName = "getRecipe", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetRecipe")
-    @ResponseWrapper(localName = "getRecipeResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetRecipeResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/getRecipeRequest", output = "http://ws.storage.introsde/Storage/getRecipeResponse")
-    public Recipe getRecipe(
-        @WebParam(name = "recipeId", targetNamespace = "")
-        int recipeId);
-
-    /**
-     * 
-     * @param text
-     * @return
-     *     returns java.util.List<introsde.adapter.ws.Recipe>
-     */
-    @WebMethod
-    @WebResult(name = "recipes", targetNamespace = "")
-    @RequestWrapper(localName = "searchRecipes", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.SearchRecipes")
-    @ResponseWrapper(localName = "searchRecipesResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.SearchRecipesResponse")
-    @Action(input = "http://ws.storage.introsde/Storage/searchRecipesRequest", output = "http://ws.storage.introsde/Storage/searchRecipesResponse")
-    public List<Recipe> searchRecipes(
         @WebParam(name = "text", targetNamespace = "")
         String text);
 

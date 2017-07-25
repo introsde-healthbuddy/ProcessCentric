@@ -30,22 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Recipe }
-     * 
-     */
-    public Recipe createRecipe() {
-        return new Recipe();
-    }
-
-    /**
-     * Create an instance of {@link Exercise }
-     * 
-     */
-    public Exercise createExercise() {
-        return new Exercise();
-    }
-
-    /**
      * Create an instance of {@link Food }
      * 
      */
