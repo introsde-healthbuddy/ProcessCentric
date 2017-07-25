@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "StorageService", targetNamespace = "http://ws.storage.introsde/", wsdlLocation = "http://192.168.1.108:6904/storage?wsdl")
+@WebServiceClient(name = "StorageService", targetNamespace = "http://ws.storage.introsde/", wsdlLocation = "https://healthbuddy-storageservice.herokuapp.com/storage?wsdl")
 public class StorageService
     extends Service
 {
@@ -30,7 +30,7 @@ public class StorageService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://192.168.1.108:6904/storage?wsdl");
+            url = new URL("https://healthbuddy-storageservice.herokuapp.com/storage?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
