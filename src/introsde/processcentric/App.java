@@ -22,7 +22,7 @@ public class App {
             hostname = "localhost";
         }
 
-        URI BASE_URI = new URI(protocol + hostname + port + "fitApp/");
+        URI BASE_URI = new URI(protocol + hostname + port );
 
         System.out.println("Starting fitApp standalone HTTP server...");
         JdkHttpServerFactory.createHttpServer(BASE_URI, createApp());
