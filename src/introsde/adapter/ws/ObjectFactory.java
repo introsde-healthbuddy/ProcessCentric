@@ -30,11 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Food }
+     * Create an instance of {@link Exercise }
      * 
      */
-    public Food createFood() {
-        return new Food();
+    public Exercise createExercise() {
+        return new Exercise();
     }
 
 }

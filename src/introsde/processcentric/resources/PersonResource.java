@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -116,5 +117,16 @@ public class PersonResource {
 					    holder.value)).build(); 
     }
     
+    @DELETE
+    @Path("{personId}")
+    public Response deletePerson(@PathParam("personId") Long personId) {
+    	
+    	initializeStorage();
+    	
+    	storage.deletePerson(personId);
+    	
+        return Response.noContent().build();
+    	
+    }
     
 }

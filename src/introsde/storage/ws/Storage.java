@@ -11,7 +11,10 @@ import javax.xml.ws.Action;
 import javax.xml.ws.Holder;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
+import introsde.adapter.ws.Exercise;
 import introsde.adapter.ws.Food;
+import introsde.localdatabase.soap.Activity;
+import introsde.localdatabase.soap.Goal;
 import introsde.localdatabase.soap.Measure;
 import introsde.localdatabase.soap.Person;
 
@@ -33,8 +36,37 @@ public interface Storage {
 
     /**
      * 
+     * @param personId
+     * @return
+     *     returns java.util.List<introsde.localdatabase.soap.Goal>
+     */
+    @WebMethod
+    @WebResult(name = "goal", targetNamespace = "")
+    @RequestWrapper(localName = "readGoal", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.ReadGoal")
+    @ResponseWrapper(localName = "readGoalResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.ReadGoalResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/readGoalRequest", output = "http://ws.storage.introsde/Storage/readGoalResponse")
+    public List<Goal> readGoal(
+        @WebParam(name = "personId", targetNamespace = "")
+        Long personId);
+
+    /**
+     * 
+     * @param foodId
+     * @return
+     *     returns introsde.adapter.ws.Food
+     */
+    @WebMethod
+    @WebResult(name = "food", targetNamespace = "")
+    @RequestWrapper(localName = "getFood", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetFood")
+    @ResponseWrapper(localName = "getFoodResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetFoodResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/getFoodRequest", output = "http://ws.storage.introsde/Storage/getFoodResponse")
+    public Food getFood(
+        @WebParam(name = "foodId", targetNamespace = "")
+        int foodId);
+
+    /**
+     * 
      * @param person
-     * @return 
      */
     @WebMethod
     @RequestWrapper(localName = "createPerson", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CreatePerson")
@@ -181,6 +213,111 @@ public interface Storage {
 
     /**
      * 
+     * @param personId
+     * @return
+     *     returns java.util.List<introsde.localdatabase.soap.Activity>
+     */
+    @WebMethod
+    @WebResult(name = "activity", targetNamespace = "")
+    @RequestWrapper(localName = "readActivity", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.ReadActivity")
+    @ResponseWrapper(localName = "readActivityResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.ReadActivityResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/readActivityRequest", output = "http://ws.storage.introsde/Storage/readActivityResponse")
+    public List<Activity> readActivity(
+        @WebParam(name = "personId", targetNamespace = "")
+        Long personId);
+
+    /**
+     * 
+     * @param activity
+     * @param personId
+     */
+    @WebMethod
+    @RequestWrapper(localName = "createActivity", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CreateActivity")
+    @ResponseWrapper(localName = "createActivityResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CreateActivityResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/createActivityRequest", output = "http://ws.storage.introsde/Storage/createActivityResponse")
+    public void createActivity(
+        @WebParam(name = "personId", targetNamespace = "")
+        Long personId,
+        @WebParam(name = "activity", targetNamespace = "", mode = WebParam.Mode.INOUT)
+        Holder<Activity> activity);
+
+    /**
+     * 
+     * @param activity
+     * @param personId
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateActivity", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.UpdateActivity")
+    @ResponseWrapper(localName = "updateActivityResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.UpdateActivityResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/updateActivityRequest", output = "http://ws.storage.introsde/Storage/updateActivityResponse")
+    public void updateActivity(
+        @WebParam(name = "personId", targetNamespace = "")
+        Long personId,
+        @WebParam(name = "activity", targetNamespace = "", mode = WebParam.Mode.INOUT)
+        Holder<Activity> activity);
+
+    /**
+     * 
+     * @param activityId
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(name = "succes", targetNamespace = "")
+    @RequestWrapper(localName = "deleteActivity", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.DeleteActivity")
+    @ResponseWrapper(localName = "deleteActivityResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.DeleteActivityResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/deleteActivityRequest", output = "http://ws.storage.introsde/Storage/deleteActivityResponse")
+    public int deleteActivity(
+        @WebParam(name = "activityId", targetNamespace = "")
+        Long activityId);
+
+    /**
+     * 
+     * @param goal
+     * @param personId
+     */
+    @WebMethod
+    @RequestWrapper(localName = "createGoal", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CreateGoal")
+    @ResponseWrapper(localName = "createGoalResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.CreateGoalResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/createGoalRequest", output = "http://ws.storage.introsde/Storage/createGoalResponse")
+    public void createGoal(
+        @WebParam(name = "personId", targetNamespace = "")
+        Long personId,
+        @WebParam(name = "goal", targetNamespace = "", mode = WebParam.Mode.INOUT)
+        Holder<Goal> goal);
+
+    /**
+     * 
+     * @param goal
+     * @param personId
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateGoal", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.UpdateGoal")
+    @ResponseWrapper(localName = "updateGoalResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.UpdateGoalResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/updateGoalRequest", output = "http://ws.storage.introsde/Storage/updateGoalResponse")
+    public void updateGoal(
+        @WebParam(name = "personId", targetNamespace = "")
+        Long personId,
+        @WebParam(name = "goal", targetNamespace = "", mode = WebParam.Mode.INOUT)
+        Holder<Goal> goal);
+
+    /**
+     * 
+     * @param goalId
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(name = "succes", targetNamespace = "")
+    @RequestWrapper(localName = "deleteGoal", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.DeleteGoal")
+    @ResponseWrapper(localName = "deleteGoalResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.DeleteGoalResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/deleteGoalRequest", output = "http://ws.storage.introsde/Storage/deleteGoalResponse")
+    public int deleteGoal(
+        @WebParam(name = "goalId", targetNamespace = "")
+        Long goalId);
+
+    /**
+     * 
      * @param text
      * @return
      *     returns java.util.List<introsde.adapter.ws.Food>
@@ -193,5 +330,17 @@ public interface Storage {
     public List<Food> searchFood(
         @WebParam(name = "text", targetNamespace = "")
         String text);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<introsde.adapter.ws.Exercise>
+     */
+    @WebMethod
+    @WebResult(name = "exercises", targetNamespace = "")
+    @RequestWrapper(localName = "getExercises", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetExercises")
+    @ResponseWrapper(localName = "getExercisesResponse", targetNamespace = "http://ws.storage.introsde/", className = "introsde.storage.ws.GetExercisesResponse")
+    @Action(input = "http://ws.storage.introsde/Storage/getExercisesRequest", output = "http://ws.storage.introsde/Storage/getExercisesResponse")
+    public List<Exercise> getExercises();
 
 }
